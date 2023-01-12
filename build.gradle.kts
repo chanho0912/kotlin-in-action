@@ -9,10 +9,10 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 allprojects {
+    apply(plugin = Plugins.JETBRAINS_KOTLIN)
+
     group = ProjectConfigs.GROUP
     version = ProjectConfigs.VERSION
-
-    apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {
         mavenCentral()

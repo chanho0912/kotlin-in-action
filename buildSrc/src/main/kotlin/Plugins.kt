@@ -1,3 +1,3 @@
 object Plugins {
-    const val KOTLIN_PLUGINS = "kotlin-plugin"
+    const val JETBRAINS_KOTLIN = "org.jetbrains.kotlin.jvm"
 }
