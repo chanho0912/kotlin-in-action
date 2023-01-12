@@ -80,6 +80,7 @@ fun <T> Collection<T>.joinToStringCollectionExtension(
     }
 
     result.append(postfix)
+    // commit
     return result.toString()
 }
 
