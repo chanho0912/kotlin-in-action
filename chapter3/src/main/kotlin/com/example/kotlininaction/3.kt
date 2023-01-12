@@ -1,4 +1,4 @@
-package com.example.kotlininaction.chapter3
+package com.example.kotlininaction
 
 import java.lang.IllegalArgumentException
 

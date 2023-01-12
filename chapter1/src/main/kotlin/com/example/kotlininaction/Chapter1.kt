@@ -1,14 +1,13 @@
-package com.example.kotlininaction.chapter1
-
+package com.example.kotlininaction
 data class Person(
-    val name: String,
-    val age: Int? = null // null by default
+        val name: String,
+        val age: Int? = null // null by default
 )
 
 fun main(args: Array<String>) {
     val persons = listOf(
-        Person("Alice"),
-        Person("Bob", age = 29)
+            Person("Alice"),
+            Person("Bob", age = 29)
     )
 
     val oldest = persons.maxByOrNull { it.age ?: 0 } // use it as the default name of that parameter

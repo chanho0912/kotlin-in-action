@@ -1,36 +1,37 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.3"
-    id("io.spring.dependency-management") version "1.0.13.RELEASE"
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
+    kotlin("jvm") version ProjectConfigs.Version.KOTLIN_VERSION
+    // Kotlin Annotation Processing Tool
+    kotlin("kapt") version ProjectConfigs.Version.KAPT_VERSION
 }
 
-group = "com.example"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-repositories {
-    mavenCentral()
-}
+allprojects {
+    group = ProjectConfigs.GROUP
+    version = ProjectConfigs.VERSION
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+    dependencies {
+        implementation(Dependencies.Libs.KOTLIN)
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf(ProjectConfigs.JSR_305)
+            jvmTarget = ProjectConfigs.Version.TARGET_JVM
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
+
