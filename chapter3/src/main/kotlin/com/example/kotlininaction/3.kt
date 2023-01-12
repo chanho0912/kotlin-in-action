@@ -120,7 +120,7 @@ fun saveUser(user: User) {
         throw IllegalArgumentException("")
     }
 
-    if (user.address.isEmpty()){
+    if (user.address.isEmpty()) {
         throw IllegalArgumentException("")
     }
 

@@ -48,7 +48,7 @@ enum class Color(
 }
 
 fun getMnemonic(color: Color): String {
-    return when(color) {
+    return when (color) {
         Color.RED -> "Richard"
         Color.ORANGE -> "Of"
         Color.YELLOW -> "York"
@@ -64,7 +64,7 @@ fun getMnemonic(color: Color): String {
  * when allows any object
  */
 
-fun mix(c1: Color, c2: Color) = when(setOf(c1, c2)) {
+fun mix(c1: Color, c2: Color) = when (setOf(c1, c2)) {
     setOf(Color.RED, Color.YELLOW) -> Color.ORANGE
     setOf(Color.YELLOW, Color.BLUE) -> Color.GREEN
     setOf(Color.BLUE, Color.VIOLET) -> Color.INDIGO
@@ -72,7 +72,7 @@ fun mix(c1: Color, c2: Color) = when(setOf(c1, c2)) {
 }
 
 
-fun getWarmth(color: Color) = when(color) {
+fun getWarmth(color: Color) = when (color) {
     Color.RED, Color.ORANGE, Color.YELLOW -> "warm"
     Color.GREEN -> "neutral"
     Color.BLUE, Color.INDIGO, Color.VIOLET -> "cold"
@@ -85,7 +85,7 @@ interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
 
-fun eval(e: Expr): Int = when(e) {
+fun eval(e: Expr): Int = when (e) {
     is Num -> e.value
     is Sum -> eval(e.left) + eval(e.right)
     else -> throw IllegalArgumentException("Cannot parse Expr")

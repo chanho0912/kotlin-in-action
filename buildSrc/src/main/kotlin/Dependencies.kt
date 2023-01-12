@@ -10,8 +10,8 @@
 object Dependencies {
     object Libs {
         val KOTLIN = listOf(
-                "org.jetbrains.kotlin:kotlin-reflect",
-                "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+            "org.jetbrains.kotlin:kotlin-reflect",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
         )
     }
 }
