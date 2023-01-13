@@ -1,23 +1,15 @@
 package com.example.kotlininaction
 
-data class Person(
-    val name: String,
-    val age: Int? = null // null by default
-)
-
-fun main(args: Array<String>) {
-    val persons = listOf(
-        Person("Alice"),
-        Person("Bob", age = 29)
-    )
-
-    val oldest = persons.maxByOrNull { it.age ?: 0 } // use it as the default name of that parameter
-    println("The oldest is: $oldest")
-}
-
 /**
  * Just like Java, Kotlin is a statically typed programming language.
  * This means the type of every expression in a program is known at compile time
+ */
+
+//fun findAlice() = findPerson { it.name == "Alice" }
+//fun findBob() = findPerson { it.name == "Bob" }
+
+/**
+ * 간결성, 생산성, 안전성 (kotlin 핵심)
  */
 
 /**
@@ -75,4 +67,20 @@ fun main(args: Array<String>) {
  * the check and the cast are combined into a single operation:
  * once you’ve checked the type, you can refer to members of that type without any additional casts.
  */
+fun main(args: Array<String>) {
+    val persons = listOf(
+        Person("Alice"),
+        Person("Bob", age = 29)
+    )
+
+    val oldest = persons.maxByOrNull { it.age ?: 0 } // use it as the default name of that parameter
+    println("The oldest is: $oldest")
+
+//    val alice = findAlice(persons)
+//    val bob = findBob(persons)
+//
+//    println(alice.toString())
+//    println(bob.toString())
+}
+
 
