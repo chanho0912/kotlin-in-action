@@ -1,6 +1,8 @@
 package com.example.kotlininaction
 
+import java.io.BufferedReader
 import java.lang.IllegalArgumentException
+import java.lang.NumberFormatException
 
 fun max(a: Int, b: Int): Int {
     /**
@@ -9,6 +11,8 @@ fun max(a: Int, b: Int): Int {
      */
     return if (a > b) a else b
 }
+
+fun simplifyMax(a: Int, b: Int): Int = if (a > b) a else b
 
 /**
  * expression body 인경우 return type 생략 가능 (type inference)
@@ -30,6 +34,11 @@ class Person(
         get() = "Kim $name"
 
 }
+
+class TestGetterAndSetter(
+    val field_1: String,
+    var field_2: String
+)
 
 enum class Color(
     var r: Int,
@@ -78,12 +87,30 @@ fun getWarmth(color: Color) = when (color) {
     Color.BLUE, Color.INDIGO, Color.VIOLET -> "cold"
 }
 
-/**
- * In Kotlin, you check whether a variable is of a certain type by using an "is" check.
- */
 interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
+/**
+ * In Kotlin, you check whether a variable is of a certain type by using an "is" check.
+ */
+
+fun evaluate(e: Expr): Int {
+    if (e is Num) {
+        // smart cast using is keyword
+        return e.value
+    }
+
+    if (e is Sum) {
+        // smart cast using is keyword
+        return evaluate(e.left) + evaluate(e.right)
+    }
+
+    throw IllegalArgumentException()
+}
+
+/**
+ * In Kotlin, there is no ternary operator
+ */
 
 fun eval(e: Expr): Int = when (e) {
     is Num -> e.value
@@ -100,18 +127,32 @@ fun eval(e: Expr): Int = when (e) {
  * Kotlin doesn’t differentiate between checked and unchecked exceptions
  */
 
+fun readNumber(reader: BufferedReader) {
+    val number = try {
+        Integer.parseInt(reader.readLine())
+    } catch (e: NumberFormatException) {
+        return
+    }
+
+    println(number)
+}
+
 fun main(args: Array<String>) {
     println("Hello, world!!")
     println(max(2, 5))
+    println("simplify max ${simplifyMax(2, 8)}")
 
-    val str: String = "Chan Ho"
-
-    /**
-     * Easier string formatting: string templates
-     */
-    println("Hello, ${if (str.length > 4) str else "kotlin"}")
+    val name = if (args.size > 0) args[0] else "kotlin"
+    println("name is ${name}")
 
     val person = Person(name = "aaa", age = 15, true)
+
+    val testGetterAndSetter = TestGetterAndSetter("field1", "field2")
+//    testGetterAndSetter.field_1 = "a" -> error
+    testGetterAndSetter.field_2 = "bcde" // -> ok
+    println("testGetterAndSetter1 = ${testGetterAndSetter.field_1}")
+    println("testGetterAndSetter2 = ${testGetterAndSetter.field_2}")
+
 //
 //    println(person.name)
 //    person.name = "asd"
@@ -120,18 +161,14 @@ fun main(args: Array<String>) {
     person.age = 5
 
     println(person.isMarried)
-
     println((person.fullName))
-
     println(Color.BLUE.rgb())
-
     println(getMnemonic(Color.RED))
-
     println(getWarmth(Color.BLUE))
-
     println(mix(Color.BLUE, Color.YELLOW))
-
     println(eval(Sum(Num(1), Num(2))))
+
+    val oneToTen = 1..10
 }
 
 /**
