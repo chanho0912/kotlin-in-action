@@ -1,5 +1,6 @@
 package com.example.kotlininaction
 
+import com.example.kotlininaction.strings.firstChar
 import java.lang.IllegalArgumentException
 
 val set = hashSetOf(1, 7, 33)
@@ -66,6 +67,9 @@ class Person(
 
 // fun Person.printName() = println(this.name) => compile error
 
+/**
+ * Java에서 Util class를 만들어 넣었던 관행이 kotlin에서는 필요없다.
+ */
 fun <T> Collection<T>.joinToStringCollectionExtension(
     separator: String,
     prefix: String,
@@ -140,8 +144,36 @@ fun User.validateBeforeSave() {
     validate(this.address, "address")
 }
 
+fun getSum(vararg numbers: Int): Int {
+    var sum = 0
+    for (number in numbers) {
+        sum += number
+    }
+
+    return sum
+}
+
+infix fun Int.greaterInt(other: Int): Int = if (this > other) this else other
 
 fun main(args: Array<String>) {
+    val array = intArrayOf(1, 2, 3, 4, 5)
+    /* kotlin에서는 vararg 파라미터를 전달하기 위해 spread operator를 사용해야 한다. */
+    println(getSum(*array))
+
+    val x = 6
+    val y = 3
+    val greaterValue = x greaterInt y
+
+    println(greaterValue)
+
+    val map = mapOf(1 to "one", 2 to "two", 3 to "three")
+
+    val extensionTest: String = "extension"
+    val extensionTest2: String = ""
+
+    println(extensionTest.firstChar())
+    println(extensionTest2.firstChar() ?: "null returns")
+
     val list = listOf(1, 2, 3)
     println(
         joinToString(
