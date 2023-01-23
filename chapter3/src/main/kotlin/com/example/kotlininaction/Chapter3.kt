@@ -155,10 +155,32 @@ fun getSum(vararg numbers: Int): Int {
 
 infix fun Int.greaterInt(other: Int): Int = if (this > other) this else other
 
+//fun parsePath(path: String) {
+//    val directory = path.substringBeforeLast("/")
+//    val fullName = path.substringAfterLast("/")
+//
+//    val fileName = fullName.substringBeforeLast(".")
+//    val extension = fullName.substringAfterLast(".")
+//
+//    println("Dir: $directory, name: $fileName, ext: $extension")
+//}
+
+fun parsePath(path: String) {
+    val regex = """(.+)/(.+)\.(.+)""".toRegex()
+    val matchResult = regex.matchEntire(path)
+    if (matchResult != null) {
+        val (directory, filename, extension) = matchResult.destructured
+        println("Dir: $directory, name: $filename, ext: $extension")
+    }
+}
+
+
 fun main(args: Array<String>) {
     val array = intArrayOf(1, 2, 3, 4, 5)
     /* kotlin에서는 vararg 파라미터를 전달하기 위해 spread operator를 사용해야 한다. */
     println(getSum(*array))
+
+    parsePath("/Users/yole/kotlin-book/chapter.adoc")
 
     val x = 6
     val y = 3
