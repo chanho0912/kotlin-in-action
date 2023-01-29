@@ -76,6 +76,16 @@ fun main(args: Array<String>) {
     val oldest = persons.maxByOrNull { it.age ?: 0 } // use it as the default name of that parameter
     println("The oldest is: $oldest")
 
+    val notInternal: TestNotInternal = TestNotInternal(5)
+    notInternal.info()
+
+//    val internalClass = TestInternal(5) compile error
+
+    val internalMethodTest = InternalMethodTest(5)
+//    internalMethodTest.info() compile error
+
+
+
 //    val alice = findAlice(persons)
 //    val bob = findBob(persons)
 //
